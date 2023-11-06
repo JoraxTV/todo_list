@@ -10,6 +10,10 @@
     if (description == "") return;
     taches.value.push({id:id++, description:description, faite:false});
   }
+
+  function retirerTache(id:number){
+    taches.value = taches.value.filter(tache => tache.id != id);
+  }
 </script>
 
 <template>
@@ -18,7 +22,9 @@
   <div id="wrapper">
       <ul>
         <li v-for="tache in taches" :key="tache.id">
-        <span>{{tache.description}}</span>
+          <input type="checkbox" v-model="tache.faite"/>
+          <span>{{tache.description}}</span>
+          <button @click="retirerTache(tache.id)">Retirer</button>
         </li>
       </ul>
     </div>
@@ -60,4 +66,17 @@ header {
     flex-wrap: wrap;
   }
 }
+#wrapper{
+   border-radius: 5px;
+   border:solid black 2px;
+   padding: 10px;
+ }
+ ul,span{
+   padding:10px;
+ }
+ li{
+   list-style: none;
+   padding: 2px 0px;
+ }
+ 
 </style>
