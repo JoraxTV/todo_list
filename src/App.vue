@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
-let url = "https://vuejs.org/";
-let compteur = ref(0);
-function incremente() {
-  compteur.value++;
-  console.log(compteur.value);
-}
+ import {ref} from 'vue';
+  let id = 0;
+  const taches = ref([{id:id++, description:"Apprendre Vue", faite:false},
+    {id:id++, description:"Finir la SAÉ", faite:false},
+    {id:id++, description:"Réviser pour l'interro", faite:false}]);
 </script>
 
 <template>
-  <h1><a v-bind:href="url">Site de Vue</a></h1>
-  <button v-on:click="incremente">{{ compteur }}</button>
-  <input type="number" v-model="compteur" />
+ <div id="wrapper">
+    <ul>
+      <li v-for="tache in taches" :key="tache.id">
+   	 <span>{{tache.description}}</span>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
