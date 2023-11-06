@@ -14,9 +14,14 @@
   function retirerTache(id:number){
     taches.value = taches.value.filter(tache => tache.id != id);
   }
+
+  const cacheFaits = ref(false);
 </script>
 
 <template>
+  <button @click="cacheFaits = !cacheFaits">
+    {{ cacheFaits ? 'Tout montrer' : 'Cacher les tâches terminées' }}
+</button>
   <input type="text" v-model.trim="description" placeholder="Ajouter une tâche"/>
   <button @click="ajouterTache(description)">Ajouter</button>
   <div id="wrapper">
