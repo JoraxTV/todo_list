@@ -1,5 +1,5 @@
 <script setup lang="ts">
- import {ref} from 'vue';
+ import {ref, computed} from 'vue';
   let id = 0;
   const taches = ref([{id:id++, description:"Apprendre Vue", faite:false},
     {id:id++, description:"Finir la SAÉ", faite:false},
@@ -17,9 +17,9 @@
 
   const cacheFaits = ref(false);
 
-  function tachesFiltrees(){
+  const tachesFiltrees = computed(() => {
     return cacheFaits.value ? taches.value.filter(tache => !tache.faite) : taches.value;
-  }
+  });
 </script>
 
 <template>
@@ -30,7 +30,7 @@
   <button @click="ajouterTache(description)">Ajouter</button>
   <div id="wrapper">
       <ul>
-        <li v-for="tache in tachesFiltrees()" :key="tache.id">
+        <li v-for="tache in tachesFiltrees" :key="tache.id">
           <input type="checkbox" v-model="tache.faite"/>
           <span class="description" :class="{fait:tache.faite, pasfait:!tache.faite}">{{tache.description}}</span>
           <button @click="retirerTache(tache.id)">Retirer</button>
