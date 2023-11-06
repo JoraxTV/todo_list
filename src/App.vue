@@ -4,19 +4,36 @@
   const taches = ref([{id:id++, description:"Apprendre Vue", faite:false},
     {id:id++, description:"Finir la SAÉ", faite:false},
     {id:id++, description:"Réviser pour l'interro", faite:false}]);
+  
+  let description = "";
+  function ajouterTache(description:string){
+    if (description == "") return;
+    taches.value.push({id:id++, description:description, faite:false});
+  }
 </script>
 
 <template>
- <div id="wrapper">
-    <ul>
-      <li v-for="tache in taches" :key="tache.id">
-   	 <span>{{tache.description}}</span>
-      </li>
-    </ul>
-  </div>
+  <input type="text" v-model="description" placeholder="Ajouter une tâche"/>
+  <button @click="ajouterTache(description)">Ajouter</button>
+  <div id="wrapper">
+      <ul>
+        <li v-for="tache in taches" :key="tache.id">
+        <span>{{tache.description}}</span>
+        </li>
+      </ul>
+    </div>
 </template>
 
 <style scoped>
+body{
+  font-family: sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 header {
   line-height: 1.5;
 }
