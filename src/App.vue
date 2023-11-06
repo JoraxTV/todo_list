@@ -16,6 +16,10 @@
   }
 
   const cacheFaits = ref(false);
+
+  function tachesFiltrees(){
+    return cacheFaits.value ? taches.value.filter(tache => !tache.faite) : taches.value;
+  }
 </script>
 
 <template>
@@ -26,7 +30,7 @@
   <button @click="ajouterTache(description)">Ajouter</button>
   <div id="wrapper">
       <ul>
-        <li v-for="tache in taches" :key="tache.id">
+        <li v-for="tache in tachesFiltrees()" :key="tache.id">
           <input type="checkbox" v-model="tache.faite"/>
           <span class="description" :class="{fait:tache.faite, pasfait:!tache.faite}">{{tache.description}}</span>
           <button @click="retirerTache(tache.id)">Retirer</button>
