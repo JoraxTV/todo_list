@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <input type="text" v-model="description" placeholder="Ajouter une tâche"/>
+  <input type="text" v-model.trim="description" placeholder="Ajouter une tâche"/>
   <button @click="ajouterTache(description)">Ajouter</button>
   <div id="wrapper">
       <ul>
