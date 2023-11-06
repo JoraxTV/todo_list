@@ -23,7 +23,7 @@
       <ul>
         <li v-for="tache in taches" :key="tache.id">
           <input type="checkbox" v-model="tache.faite"/>
-          <span>{{tache.description}}</span>
+          <span class="description" :class="{fait:tache.faite, pasfait:!tache.faite}">{{tache.description}}</span>
           <button @click="retirerTache(tache.id)">Retirer</button>
         </li>
       </ul>
@@ -79,4 +79,11 @@ header {
    padding: 2px 0px;
  }
  
+ .fait{
+   text-decoration: line-through;
+   color: grey;
+ }
+ .pasfait{
+   color: white;
+ }
 </style>
