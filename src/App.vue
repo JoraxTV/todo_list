@@ -1,34 +1,16 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
+import { ref } from "vue";
 let url = "https://vuejs.org/";
-let compteur = 0;
+let compteur = ref(0);
 function incremente() {
-  compteur++;
-  console.log(compteur);
+  compteur.value++;
+  console.log(compteur.value);
 }
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
   <h1><a v-bind:href="url">Site de Vue</a></h1>
-  <button v-on:click="incremente">+</button>
+  <button v-on:click="incremente">{{ compteur }}</button>
 </template>
 
 <style scoped>
