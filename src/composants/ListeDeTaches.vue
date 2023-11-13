@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
   import type { Ref } from 'vue';
+  import TacheElement from '@/composants/TacheElement.vue';
 
 
   interface Tache {
@@ -44,9 +45,7 @@
     @click="ajouterTache(description)">Ajouter</button>
     <ul>
       <li v-for="tache in tachesFiltrees" :key="tache.id">
-        <input type="checkbox" v-model="tache.faite" />
-        <span class="description" :class="{fait:tache.faite, pasfait:!tache.faite}">{{tache.description}}</span>
-        <button @click="retirerTache(tache.id)">Retirer</button>
+        <TacheElement :descriptionTache="tache.description" :cochee="tache.faite" @supprimerTache="retirerTache(tache.id)" />
       </li>
     </ul>
     <button @click="cacheFaits = !cacheFaits">
