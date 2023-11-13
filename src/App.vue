@@ -35,6 +35,7 @@ const ajouterListe = () => {
 <template>
   <div>
     <div v-for="liste in todoListes" :key="liste.id">
+      <button class="supprimer" @click="$emit('supprimerListe')">x</button>
       <ListeDeTaches :tasks="liste.taches" :titre="liste.titre" />
     </div>
 
@@ -47,4 +48,13 @@ const ajouterListe = () => {
 
 <style scoped>
 /* Vos styles CSS ici */
+.supprimer {
+  float: right;
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  background-color: red;
+  color: white;
+  border: none;
+}
 </style>
