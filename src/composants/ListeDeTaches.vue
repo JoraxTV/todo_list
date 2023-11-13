@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
+//   import type { emit } from 'process';
+import { ref, computed } from 'vue';
   import type { Ref } from 'vue';
   import TacheElement from '@/composants/TacheElement.vue';
 
@@ -19,6 +20,9 @@
   const taches:Ref<Tache[]> = ref([{ id: id++, description: "Apprendre Vue", faite: false },
   { id: id++, description: "Finir la SAÉ", faite: false },
   { id: id++, description: "Réviser pour l'interro", faite: false }]);
+
+
+  const emit = defineEmits<{supprimerTache:[]}>();
 
 
   let description = "";
