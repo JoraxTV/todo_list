@@ -53,10 +53,9 @@ const tachesFiltrees = computed(() => {
     <ul>
       <li v-for="tache in tachesFiltrees" :key="tache.id">
         <TacheElement
-        :description-tache="tache.description"
         v-model="tache.faite"
         @supprimer-tache="retirerTache(tache.id)"
-        />
+        >{{ tache.description }}</TacheElement>
       </li>
     </ul>
     <button @click="cacheFaits = !cacheFaits">

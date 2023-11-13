@@ -37,6 +37,7 @@ const retirerListe = (id: number, titre: string) => {
     todoListes.value = todoListes.value.filter(liste => liste.id != id);
   }
 };
+
 </script>
 
 <template>
