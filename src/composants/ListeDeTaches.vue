@@ -30,7 +30,7 @@
   function retirerTache(id: number) {
     taches.value = taches.value.filter(tache => tache.id != id);
   }
-  
+
   const cacheFaits = ref(false);
   const tachesFiltrees = computed(() => {
     return cacheFaits.value ? taches.value.filter(tache => !tache.faite) : taches.value;
@@ -70,15 +70,6 @@
   li {
     list-style: none;
     padding: 2px 0px;
-  }
-
-  .fait {
-    text-decoration: line-through;
-    color: grey;
-  }
-
-  .pasfait {
-    color: white;
   }
 
   h2 {
