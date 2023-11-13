@@ -30,12 +30,19 @@ const ajouterListe = () => {
   todoListes.value.push(nouvelleListe);
   nouveauTitre.value = ''; // Réinitialise le champ d'entrée
 };
+
+// Fonction pour supprimer une liste de tâches
+const retirerListe = (id: number, titre: string) => {
+  if (confirm(`Voulez-vous vraiment supprimer la liste "${titre}"?`)) {
+    todoListes.value = todoListes.value.filter(liste => liste.id != id);
+  }
+};
 </script>
 
 <template>
   <div>
     <div v-for="liste in todoListes" :key="liste.id">
-      <button class="supprimer" @click="$emit('supprimerListe')">x</button>
+      <button class="supprimer" @click="retirerListe(liste.id, liste.titre)">x</button>
       <ListeDeTaches :tasks="liste.taches" :titre="liste.titre" />
     </div>
 
@@ -52,9 +59,11 @@ const ajouterListe = () => {
   float: right;
   margin: 0.5em;
   padding: 0.5em;
-  border-radius: 0.5em;
+  border-radius: 5px;
   background-color: red;
   color: white;
   border: none;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>

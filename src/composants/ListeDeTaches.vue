@@ -30,8 +30,7 @@
   function retirerTache(id: number) {
     taches.value = taches.value.filter(tache => tache.id != id);
   }
-
-
+  
   const cacheFaits = ref(false);
   const tachesFiltrees = computed(() => {
     return cacheFaits.value ? taches.value.filter(tache => !tache.faite) : taches.value;
