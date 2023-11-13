@@ -9,11 +9,11 @@ interface Tache {
   faite: boolean;
 }
 
-const props = defineProps({
+defineProps({
   titre: String,
 });
 
-const emit = defineEmits<{
+defineEmits<{
   supprimerTache: [],
   checkedChange: [boolean];
 }>();
@@ -33,10 +33,6 @@ const ajouterTache = (description: string) => {
 
 const retirerTache = (id: number) => {
   taches.value = taches.value.filter(tache => tache.id !== id);
-};
-
-const supprimerListe = () => {
-  emit('supprimerTache');
 };
 
 const cacheFaits = ref(false);

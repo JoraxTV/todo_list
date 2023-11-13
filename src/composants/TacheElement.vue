@@ -3,7 +3,7 @@ import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps<{ modelValue: boolean }>();
 
-const emit = defineEmits(['update:modelValue', 'supprimerTache']);
+defineEmits(['update:modelValue', 'supprimerTache']);
 </script>
 
 <template>
