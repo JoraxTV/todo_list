@@ -39,11 +39,10 @@
 </script>
 
 <template>
-  <input type="text" v-model.trim="description" placeholder="Ajouter une tâche" /> <button
-    @click="ajouterTache(description)">Ajouter</button>
-
   <div id="wrapper">
     <h2>{{ titre }}</h2>
+    <input type="text" v-model.trim="description" placeholder="Ajouter une tâche" /> <button
+    @click="ajouterTache(description)">Ajouter</button>
     <ul>
       <li v-for="tache in tachesFiltrees" :key="tache.id">
         <input type="checkbox" v-model="tache.faite" />
@@ -51,10 +50,10 @@
         <button @click="retirerTache(tache.id)">Retirer</button>
       </li>
     </ul>
-  </div>
-  <button @click="cacheFaits = !cacheFaits">
+    <button @click="cacheFaits = !cacheFaits">
     {{ cacheFaits ? 'Tout montrer' : 'Cacher les tâches terminées' }}
   </button>
+  </div>
 </template>
 
 <style scoped>
