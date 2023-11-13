@@ -9,6 +9,10 @@
     faite: boolean;
   }
 
+  const props = defineProps({
+        titre: String
+    });
+
   
   let id = 0;
   const taches:Ref<Tache[]> = ref([{ id: id++, description: "Apprendre Vue", faite: false },
@@ -39,6 +43,7 @@
     @click="ajouterTache(description)">Ajouter</button>
 
   <div id="wrapper">
+    <h2>{{ titre }}</h2>
     <ul>
       <li v-for="tache in tachesFiltrees" :key="tache.id">
         <input type="checkbox" v-model="tache.faite" />
@@ -77,4 +82,8 @@
   .pasfait {
     color: white;
   }
+
+  h2 {
+        color: #afbedd;
+    }
 </style>
