@@ -1,13 +1,17 @@
 <script setup lang="ts">
-  import {ref} from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
-  const props = defineProps<{descriptionTache: string, cochee:boolean}>();
+const props = defineProps<{ descriptionTache: string, modelValue: boolean }>();
+
+const emit = defineEmits(['update:modelValue', 'supprimerTache']);
 </script>
 
 <template>
-    <input type ="checkbox" :checked="props.cochee">
-    <span :class="{fait:props.cochee, pasfait:!props.cochee}">{{props.descriptionTache}}</span>
+  <div>
+    <input type="checkbox" :checked="props.modelValue" @change="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)" />
+    <span :class="{ fait: props.modelValue, pasfait: !props.modelValue }">{{ props.descriptionTache }}</span>
     <button @click="$emit('supprimerTache')">Retirer</button>
+  </div>
 </template>
 
 <style scoped>

@@ -1,45 +1,48 @@
 <script setup lang="ts">
-//   import type { emit } from 'process';
-import { ref, computed } from 'vue';
-  import type { Ref } from 'vue';
-  import TacheElement from '@/composants/TacheElement.vue';
+import { ref, computed, defineEmits } from 'vue';
+import type { Ref } from 'vue';
+import TacheElement from '@/composants/TacheElement.vue';
 
+interface Tache {
+  id: number;
+  description: string;
+  faite: boolean;
+}
 
-  interface Tache {
-    id: number;
-    description: string;
-    faite: boolean;
-  }
+const props = defineProps({
+  titre: String,
+});
 
-  const props = defineProps({
-        titre: String
-    });
+const emit = defineEmits<{
+  supprimerTache: [],
+  checkedChange: [boolean];
+}>();
 
-  
-  let id = 0;
-  const taches:Ref<Tache[]> = ref([{ id: id++, description: "Apprendre Vue", faite: false },
+let id = 0;
+const taches: Ref<Tache[]> = ref([
+  { id: id++, description: "Apprendre Vue", faite: false },
   { id: id++, description: "Finir la SAÉ", faite: false },
-  { id: id++, description: "Réviser pour l'interro", faite: false }]);
+  { id: id++, description: "Réviser pour l'interro", faite: false },
+]);
 
+const description = ref("");
+const ajouterTache = (description: string) => {
+  if (description === "") return;
+  taches.value.push({ id: id++, description: description, faite: false });
+};
 
-  const emit = defineEmits<{supprimerTache:[]}>();
+const retirerTache = (id: number) => {
+  taches.value = taches.value.filter(tache => tache.id !== id);
+};
 
+const supprimerListe = () => {
+  emit('supprimerTache');
+};
 
-  let description = "";
-  function ajouterTache(description: string) {
-    if (description == "") return;
-    taches.value.push({ id: id++, description: description, faite: false });
-  }
-
-
-  function retirerTache(id: number) {
-    taches.value = taches.value.filter(tache => tache.id != id);
-  }
-
-  const cacheFaits = ref(false);
-  const tachesFiltrees = computed(() => {
-    return cacheFaits.value ? taches.value.filter(tache => !tache.faite) : taches.value;
-  });
+const cacheFaits = ref(false);
+const tachesFiltrees = computed(() => {
+  return cacheFaits.value ? taches.value.filter(tache => !tache.faite) : taches.value;
+});
 </script>
 
 <template>
@@ -49,12 +52,16 @@ import { ref, computed } from 'vue';
     @click="ajouterTache(description)">Ajouter</button>
     <ul>
       <li v-for="tache in tachesFiltrees" :key="tache.id">
-        <TacheElement :descriptionTache="tache.description" :cochee="tache.faite" @supprimerTache="retirerTache(tache.id)" />
+        <TacheElement
+        :description-tache="tache.description"
+        v-model="tache.faite"
+        @supprimer-tache="retirerTache(tache.id)"
+        />
       </li>
     </ul>
     <button @click="cacheFaits = !cacheFaits">
-    {{ cacheFaits ? 'Tout montrer' : 'Cacher les tâches terminées' }}
-  </button>
+      {{ cacheFaits ? 'Tout montrer' : 'Cacher les tâches terminées' }}
+    </button>
   </div>
 </template>
 
@@ -77,5 +84,21 @@ import { ref, computed } from 'vue';
 
   h2 {
         color: #afbedd;
+    }
+
+    button {
+        background-color: #afbedd;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #8f9ec5;
     }
 </style>
